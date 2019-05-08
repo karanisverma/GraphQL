@@ -14,9 +14,10 @@ con.connect(function (err) {
   if (err) throw err;
   console.log('Connection successful!');
 });
+
 export function addBook (args) {
   return new Promise((resolve, reject) =>{
-    let query = `INSERT INTO books (author, title) VALUES ('${args.author}', '${args.bookName}')`;
+    let query = `INSERT INTO books (author, title) VALUES ("${args.author}", "${args.bookName}")`;
     con.query(query,
       (err, result) => {
         if (err) throw err;
@@ -24,12 +25,12 @@ export function addBook (args) {
           'author': args.author,
           'title': args.bookName
         }
-        console.log('book added successfully')
         resolve(newBook)
       }
     )
   })
 }
+
 export function getBooks(filter = '', value = '') {
   return new Promise((resolve, reject) => {
     const query = filter ? `select * from books where ${filter} = "${value}"` : `select * from books`
