@@ -3,10 +3,15 @@ export default `
     addBook(author: String, bookName: String): Book
   }
   type Query {
-      books(filter: String, val: String): [Book] 
+      books(filter: String, val: String): [Book]
+      authors: [Author] 
     }
   type Book { 
       title: String, 
-      author: String
+      authors: [Author]
     }
+  type Author {
+    name: String
+    books: [Book]
+  }
 `;
